@@ -80,4 +80,9 @@ class PostsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+
+  def show_tags
+      @tag = Tag.find(params[:name])
+   end
 end
