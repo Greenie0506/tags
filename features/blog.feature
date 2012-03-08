@@ -5,6 +5,7 @@ Feature: blog
     Given another post tagged with Basketball
 
     And a post tagged with Baseball
+    And a post tagged with Soccer
     And a post tagged with Soccer and Basketball
 
     When I visit the homepage

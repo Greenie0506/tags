@@ -1,5 +1,10 @@
 Blog::Application.routes.draw do
-  resources :posts
+  resources :posts do
+    member do
+      get :tagged
+    end
+  end
+
   resources :tags
 
   # The priority is based upon order of creation:

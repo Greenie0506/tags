@@ -3,8 +3,9 @@ class Tag < ActiveRecord::Base
   has_many :posts, :through => :post_tags
 
 
-  def self.get_tag
-    Post.where("tag = ?", params[:name])
+  def self.get_posts(id)
+    tag = Tag.find(id)
+    posts = tag ? tag.posts : nil
   end
 
 end

@@ -14,7 +14,7 @@ Given /^another post tagged with Basketball$/ do
 end
 
 Given /^a post tagged with Soccer and Basketball$/ do
-  tag = Tag.create(name: 'Soccer')
+  tag = Tag.find_by_name("soccer")
   post = Post.create(
     title: 'Arsenal',
     content: 'Some player that plays for Arsenal and the Knicks'
@@ -41,6 +41,13 @@ Given /^a post tagged with Baseball$/ do
   post.save
 end
 
+Given /^a post tagged with Soccer$/ do
+  tag = Tag.create(name: 'soccer')
+  post = Post.create(title: 'Soccer Fanatic', content: 'Soccer Fanatic')
+  post.tags << tag
+  post.save
+end
+
 When /^I click on Basketball$/ do
   click_on("Basketball")
 end
@@ -62,4 +69,5 @@ Then /^I should only see the posts tagged with Basketball and Soccer$/ do
   page.should_not have_content("Winning")
   page.should_not have_content("Linning")
   page.should_not have_content("Cardinals")
+  page.should_not have_content("Soccer Fanatic")
 end

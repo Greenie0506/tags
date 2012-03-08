@@ -13,10 +13,8 @@
     <tr>
       <td><%= post.title %></td>
       <td><%= post.content %></td>
-      <td><%= link_to post.tags, @tag_names %></td>
-      <% post.tags.each do |tag| %>
-        <td><%= link_to tag.name, post %></td>
-      <% end %>
+      <td><%= post.tags.map(&:name) %></td>
+
       <td><%= link_to 'Show', post %></td>
       <td><%= link_to 'Edit', edit_post_path(post) %></td>
       <td><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></td>
@@ -25,20 +23,10 @@
 </table>
 <br />
 
-
 <% Tag.all.each do |tag| %>
-  <%= link_to tag.name, tag %>
+  <%= link_to tag.name.titleize, posts_path(:query => tag.name) %>
 <% end %>
 
-<% Post.all.each do |post| %>
-  <%= link_to post.title, post[:tags]  %>
-<% end %>
-
-<%= link_to 'New Post', new_post_path %>
 
 
-<%= @tag %>
 
-<% Post.all.each do |post| %>
-  <%= post.show_tags  %>
-<% end %>

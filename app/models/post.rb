@@ -4,22 +4,24 @@ class Post < ActiveRecord::Base
   has_many :tags, :through => :post_tags
   after_save :assign_tags
 
-  # def self.tagged_with
-    # @articles = Article.tagged(params[:tag])
-  # end
-
-  def self.by_tag
-    lambda{ |tag| where(:tag => tag) }
-  end
-
   def assign_tags
     if @tag_names
       self.tags = @tag_names.split(/\s+/).map do |name|
-        Tag.find_or_create_by_name()
+        Tag.find_or_create_by_name(name)
       end
     end
   end
 
+  def self.all_matching_tags(tag)
+    tags = tag.split(" ")
 
+    tag = tags.map{ |tag| Tag.where(name: tag) }
+
+    post_tags = tag.flatten.map{ |t| PostTag.where(tag_id: t.id) }
+
+    post_tags.flatten.map do |p|
+      p.post
+    end
+  end
 
 end

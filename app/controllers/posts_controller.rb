@@ -2,7 +2,13 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.xml
   def index
-    @posts = Post.all
+   @posts = Post.all
+
+  if params[:query] == nil
+      @posts = Post.all
+    else
+      @posts = Post.all_matching_tags(params[:query])
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -80,9 +86,4 @@ class PostsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-
-
-  def show_tags
-      @tag = Tag.find(params[:name])
-   end
 end
