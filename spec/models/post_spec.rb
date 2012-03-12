@@ -20,8 +20,8 @@ describe Post do
     post_2 = Post.create(title: "Post_2", content: "content_2", tag_names: "Rugby Baseball Soccer")
     post_3 = Post.create(title: "Post_3", content: "content_3", tag_names: "Basketball")
 
-    lists_of_post_that_match_tags = Post.all_matching_tags("Basketball")
-    lists_of_post_that_match_tags.should =~ [post_1, post_3]
+    lists_of_post_that_match_tags = Post.all_matching_tags("Basketball,Baseball")
+    lists_of_post_that_match_tags.should =~ [post_1]
     end
   end
 end

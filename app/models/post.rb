@@ -13,15 +13,12 @@ class Post < ActiveRecord::Base
   end
 
   def self.all_matching_tags(tag)
-    tags = tag.split(" ")
+    tags = tag.split(",")
+    tags = Tag.find(:all, :conditions => ["name in (?)", tags])
+    # Post.find(:all, :conditions => ["id in (?)", tags])
+    # Post.where((:tags == tags) & (:tags.length == tags.length))
 
-    tag = tags.map{ |tag| Tag.where(name: tag) }
-
-    post_tags = tag.flatten.map{ |t| PostTag.where(tag_id: t.id) }
-
-    post_tags.flatten.map do |p|
-      p.post
-    end
+    Post.all.select{ |p| (p.tags & tags).length == tags.length }
   end
 
 end

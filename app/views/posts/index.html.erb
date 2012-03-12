@@ -24,7 +24,7 @@
 <br />
 
 <% Tag.all.each do |tag| %>
-  <%= link_to tag.name.titleize, posts_path(:query => tag.name) %>
+  <%= link_to tag.name.titleize, posts_path(:query => tag.name + ',' + params[:query]) %>
 <% end %>
 
 

@@ -4,11 +4,13 @@ class PostsController < ApplicationController
   def index
    @posts = Post.all
 
-  if params[:query] == nil
-      @posts = Post.all
-    else
-      @posts = Post.all_matching_tags(params[:query])
-    end
+   params[:query] ||= ""
+
+   if params[:query] == nil
+     @posts = Post.all
+   else
+     @posts = Post.all_matching_tags(params[:query])
+   end
 
     respond_to do |format|
       format.html # index.html.erb
