@@ -16,7 +16,7 @@ describe Post do
 
   describe ".all_matching_tags" do
     it "should return a specific posts with matching tags" do
-    post_1 = Post.create(title: "Post_1", content: "content_1", tag_names: "Baseball Basketball")
+    post_1 = Post.create(title: "Post_1", content: "content_1", tag_names: "Baseball Basketball Tennis")
     post_2 = Post.create(title: "Post_2", content: "content_2", tag_names: "Rugby Baseball Soccer")
     post_3 = Post.create(title: "Post_3", content: "content_3", tag_names: "Basketball")
 
